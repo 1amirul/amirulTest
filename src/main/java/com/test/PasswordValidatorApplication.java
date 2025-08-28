@@ -4,7 +4,7 @@ import com.test.util.PasswordVerifierUtility;
 
 public class PasswordValidatorApplication {
     public static void main(String[] args) {
-        String password = "e";
+        String password = "Test@1234";
         PasswordVerifierUtility.TimeDelayProvider delay = () -> {
             try {
                 Thread.sleep(1000);

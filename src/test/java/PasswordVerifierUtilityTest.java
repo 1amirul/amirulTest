@@ -17,4 +17,33 @@ public class PasswordVerifierUtilityTest {
 
     }
 
+    @Test
+    void testPasswordOkIfAnyThreeConditionPassed(){
+        String password = "Test";
+        String message = verifierUtility.passwordVerifier(password);
+        Assertions.assertEquals("Password is OK",message);
+
+    }
+
+    @Test
+    void testPasswordNotOkIfNoLowerCase(){
+        String password = "TEST@1234";
+        String message = verifierUtility.passwordVerifier(password);
+        Assertions.assertEquals("Password is never OK",message);
+    }
+
+    @Test
+    void testPasswordNotOkIfNoUpperCaseNoDigit(){
+        String password = "est";
+        String message = verifierUtility.passwordVerifier(password);
+        Assertions.assertEquals("Password is never OK",message);
+    }
+
+    @Test
+    void testPasswordNotOkIfNull(){
+        String password = null;
+        String message = verifierUtility.passwordVerifier(password);
+        Assertions.assertEquals("Password is never OK",message);
+    }
+
 }
