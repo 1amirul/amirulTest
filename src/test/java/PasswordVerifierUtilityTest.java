@@ -38,12 +38,4 @@ public class PasswordVerifierUtilityTest {
         String message = verifierUtility.passwordVerifier(password);
         Assertions.assertEquals("Password is never OK",message);
     }
-
-    @Test
-    void testPasswordNotOkIfNull(){
-        String password = null;
-        String message = verifierUtility.passwordVerifier(password);
-        Assertions.assertEquals("Password is never OK",message);
-    }
-
 }

@@ -1,5 +1,7 @@
 package com.test.util;
 
+import com.test.exception.PasswordNullException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +20,10 @@ public class PasswordVerifierUtility {
             successCounter++;
             if (password.length() > 8)
                 successCounter++;
-            else
+            else {
+                provider.delay();
                 failedExceptions.add("Password should be larger than 8 characters");
+            }
             if(password.chars().anyMatch(Character:: isUpperCase))
                 successCounter++;
             else {
@@ -36,8 +40,10 @@ public class PasswordVerifierUtility {
             }
             if(password.chars().anyMatch(Character:: isDigit))
                 successCounter++;
-            else
+            else {
+                provider.delay();
                 failedExceptions.add("Password should have one number atleast");
+            }
             if (successCounter>=3)
                 return "Password is OK";
             else {
@@ -46,8 +52,9 @@ public class PasswordVerifierUtility {
             }
         }
         failedExceptions.add("Password should not be null");
-        failedExceptions.forEach(msg -> System.out.println(" "+msg));
-        return "Password is never OK";
+        throw new PasswordNullException("Password should not be null");
+        //return "Password is never OK";
+
     }
 
     public interface TimeDelayProvider {
