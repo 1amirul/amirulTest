@@ -24,36 +24,34 @@ public class PasswordVerifierUtility {
                 provider.delay();
                 failedExceptions.add("Password should be larger than 8 characters");
             }
-            if(password.chars().anyMatch(Character:: isUpperCase))
+            if (password.chars().anyMatch(Character::isUpperCase))
                 successCounter++;
             else {
                 provider.delay();
                 failedExceptions.add("Password should have one upper case letter atleast");
             }
-            if(password.chars().anyMatch(Character:: isLowerCase))
+            if (password.chars().anyMatch(Character::isLowerCase))
                 successCounter++;
             else {
                 provider.delay();
                 failedExceptions.add("Password should have one lower case letter atleast");
-                failedExceptions.forEach(msg -> System.out.println(" "+msg));
+                failedExceptions.forEach(msg -> System.out.println(" " + msg));
                 return "Password is never OK";
             }
-            if(password.chars().anyMatch(Character:: isDigit))
+            if (password.chars().anyMatch(Character::isDigit))
                 successCounter++;
             else {
                 provider.delay();
                 failedExceptions.add("Password should have one number atleast");
             }
-            if (successCounter>=3)
+            if (successCounter >= 3)
                 return "Password is OK";
             else {
-                failedExceptions.forEach(msg -> System.out.println(" "+msg));
+                failedExceptions.forEach(msg -> System.out.println(" " + msg));
                 return "Password is never OK";
             }
         }
-        failedExceptions.add("Password should not be null");
         throw new PasswordNullException("Password should not be null");
-        //return "Password is never OK";
 
     }
 
