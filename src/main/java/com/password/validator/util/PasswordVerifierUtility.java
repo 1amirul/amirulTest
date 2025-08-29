@@ -40,7 +40,7 @@ public class PasswordVerifierUtility {
             if (password.chars().anyMatch(Character::isLowerCase))
                 successCounter++;
             else {
-                provider.delay(); // delay for checking upper case letter in password
+                provider.delay(); // delay for checking lower case letter in password
                 failedExceptions.add("Password should have one lower case letter atleast");
                 failedExceptions.forEach(msg -> System.out.println(" " + msg));
                 throw new PasswordValidationException(failedExceptions);
