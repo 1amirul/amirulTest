@@ -5,8 +5,16 @@ import com.password.validator.exception.PasswordValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+@Author: Amirul Amin
+This Utility is responsible for validating password strength and conditions
+Each failed condition will throw exception
+ */
 public class PasswordVerifierUtility {
 
+    /*
+    TimeDelay is use for artificial delay for password verification
+     */
     private final TimeDelayProvider provider;
 
     public PasswordVerifierUtility(TimeDelayProvider provider){
@@ -26,13 +34,13 @@ public class PasswordVerifierUtility {
             if (password.chars().anyMatch(Character::isUpperCase))
                 successCounter++;
             else {
-                provider.delay();
+                provider.delay(); // delay for checking upper case letter in password
                 failedExceptions.add("Password should have one upper case letter atleast");
             }
             if (password.chars().anyMatch(Character::isLowerCase))
                 successCounter++;
             else {
-                provider.delay();
+                provider.delay(); // delay for checking upper case letter in password
                 failedExceptions.add("Password should have one lower case letter atleast");
                 failedExceptions.forEach(msg -> System.out.println(" " + msg));
                 throw new PasswordValidationException(failedExceptions);
