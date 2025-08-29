@@ -1,6 +1,6 @@
-package com.test.util;
+package com.password.validator.util;
 
-import com.test.exception.PasswordNullException;
+import com.password.validator.exception.PasswordValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,6 @@ public class PasswordVerifierUtility {
             if (password.length() > 8)
                 successCounter++;
             else {
-                provider.delay();
                 failedExceptions.add("Password should be larger than 8 characters");
             }
             if (password.chars().anyMatch(Character::isUpperCase))
@@ -36,22 +35,21 @@ public class PasswordVerifierUtility {
                 provider.delay();
                 failedExceptions.add("Password should have one lower case letter atleast");
                 failedExceptions.forEach(msg -> System.out.println(" " + msg));
-                return "Password is never OK";
+                throw new PasswordValidationException(failedExceptions);
             }
             if (password.chars().anyMatch(Character::isDigit))
                 successCounter++;
             else {
-                provider.delay();
                 failedExceptions.add("Password should have one number atleast");
             }
             if (successCounter >= 3)
                 return "Password is OK";
             else {
-                failedExceptions.forEach(msg -> System.out.println(" " + msg));
-                return "Password is never OK";
+                throw new PasswordValidationException(failedExceptions);
             }
         }
-        throw new PasswordNullException("Password should not be null");
+        failedExceptions.add("Password should not be null");
+        throw new PasswordValidationException(failedExceptions);
 
     }
 

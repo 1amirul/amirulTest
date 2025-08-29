@@ -1,11 +1,11 @@
-package com.test;
+package com.password.validator;
 
-import com.test.exception.PasswordNullException;
-import com.test.util.PasswordVerifierUtility;
+import com.password.validator.exception.PasswordValidationException;
+import com.password.validator.util.PasswordVerifierUtility;
 
 public class PasswordValidatorApplication {
     public static void main(String[] args) {
-        String password = "Test1234";
+        String password = "Test12345";
         PasswordVerifierUtility.TimeDelayProvider delay = () -> {
             try {
                 Thread.sleep(1000);
@@ -17,7 +17,7 @@ public class PasswordValidatorApplication {
         try {
             String message = verifierUtility.passwordVerifier(password);
             System.out.println(message);
-        } catch(PasswordNullException ex) {
+        } catch(PasswordValidationException ex) {
             System.out.println("Verification failed with message :"+ ex.getMessage());
         }
     }
