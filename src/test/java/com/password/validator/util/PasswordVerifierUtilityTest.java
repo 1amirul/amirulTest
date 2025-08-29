@@ -1,3 +1,4 @@
+package com.password.validator.util;
 import com.password.validator.exception.PasswordValidationException;
 import com.password.validator.util.PasswordVerifierUtility;
 
@@ -9,12 +10,7 @@ This is junit test class for password verifier
  */
 public class PasswordVerifierUtilityTest {
 
-    /*
-    To run test case faster we have added as no delay
-     */
-    private final PasswordVerifierUtility.TimeDelayProvider noDelay =() -> {};
-
-    private final PasswordVerifierUtility verifierUtility = new PasswordVerifierUtility(noDelay);
+    private final PasswordVerifierUtility verifierUtility = new PasswordVerifierUtility();
 
     /*
     Test positive scenario when Password is OK
